@@ -15,18 +15,33 @@ let currentDay = moment().format('L');
 cityName.text('('+ currentDay +')');
 
 $(document).on('submit', function(){
-    event.preventDefault();
+    document.preventDefault();
     let inputVal = searchInput.val().trim();
     
     //initialize functions
     getWeather(inputVal)
-    //clear input value
     searchInput.val('')
+});
+
+searchBtn.on('click', (event) => {
+    event.preventDefault();
+    let inputVal = searchInput.val().trim();
+    getWeather(inputVal)
+    searchInput.val('')
+
 })
 
 
-
 function getWeather(inputVal){
+    
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + inputVal + "&units=metric&appid=" + key;
+
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then( (response) => {
+        console.log(response)
+    })
 
 }
 
