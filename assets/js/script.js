@@ -162,6 +162,7 @@ function searchHistory(inputVal) {
 
 
 function prevSearch() {
+    searchList.empty();
     cityResult.forEach(function (city) {
         let histBtn = $('<li class"list-group-item hist-btn">');
         histBtn.attr("data-value", city); 
