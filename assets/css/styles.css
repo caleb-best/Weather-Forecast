@@ -1,0 +1,25 @@
+.lowUV {
+    background-color: rgb(101, 206, 16);
+    color: #fff;
+}
+
+.medUV {
+    background-color: rgb(245, 242, 48);
+}
+
+.highUV {
+    background-color: rgb(212, 140, 24);
+    color: #fff;
+}
+
+.veryhiUV {
+    background-color: rgb(233, 38, 13);
+    color: #fff;
+}
+
+.extremeUV {
+    background-color: rgb(221, 30, 189);
+    color: #fff;
+}
+
+

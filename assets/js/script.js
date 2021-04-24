@@ -52,8 +52,30 @@ function getWeather(inputVal){
         const lon = response.coord.lon
 
         const uvLink = 'https://api.openweathermap.org/data/2.5/uvi?&lat=' + lat + "&lon=" + lon + "&appid=" + key;
-
         console.log(uvLink);
+        $.ajax({
+            url: uvLink,
+            method: 'GET'
+        }).then( (response) => {
+            cityUV.text(response.value);
+
+            if (response.value >= 5){
+                cityUV.addClass('medUV');
+            }
+            if (response.value >= 7) {
+                cityUV.addClass('highUV');
+            }
+            if (response.value >= 10) {
+                cityUV.addClass('veryhiUV');
+            }
+            if (response.value >= 11) {
+                cityUV.addClass('extremeUV');
+            }
+            else {
+                cityUV.addClass('lowUV');
+            }
+        })
+
 
 
 
