@@ -83,6 +83,41 @@ function getWeather(inputVal){
             method: 'GET'
         }).then((response) => {
             console.log(response);
+
+            $('#fiveDay').empty();
+
+            for (var i = 1; i < response.list.length; i += 8) {
+
+                let fiveDate = moment(response.list[i].dt_txt).format('L')
+                console.log(fiveDate);
+
+                const fiveCol = $("<div class='col-12 mb-3'>");
+                const fiveCard = $("<div class='card'>");
+                const fiveCardBody = $("<div class='card-body'>")
+                const fiveDay = $("<h5 class='card-title'>");
+                const fiveIcon = $("<img>");
+                const fiveTemp = $("<p class='card-text'>");
+                const fiveHumid = $("<p class='card-text'>")
+
+                $('#fiveDay').append(fiveCol);
+                fiveCol.append(fiveCard);
+                fiveCard.append(fiveCardBody);
+
+                fiveCardBody.append(fiveDay);
+                fiveCardBody.append(fiveIcon);
+                fiveCardBody.append(fiveTemp);
+                fiveCardBody.append(fiveHumid);
+
+                fiveIcon.attr('src', 'https://openweathermap.org/img/w/' + response.list[i].weather[0].icon + '.png');
+                fiveIcon.attr('alt', response.list[i].weather[0].main);
+                fiveDay.text(fiveDate);
+                fiveTemp.text(response.list[i].main.temp + '°C');
+                fiveTemp.prepend('Temp: ')
+                fiveHumid.text(response.list[i].main.humidity + '%');
+                fiveHumid.prepend('Humidity: ');
+
+            }
+
         })
 
 
