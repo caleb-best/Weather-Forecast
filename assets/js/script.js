@@ -74,9 +74,16 @@ function getWeather(inputVal){
             else {
                 cityUV.addClass('lowUV');
             }
+        });
+
+        const fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?&units=metric&appid=" + key + "&lat=" + lat + "&lon=" + lon;
+
+        $.ajax({
+            url: fiveDayURL,
+            method: 'GET'
+        }).then((response) => {
+            console.log(response);
         })
-
-
 
 
         })
