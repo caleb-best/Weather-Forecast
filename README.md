@@ -15,7 +15,7 @@ The application uses 3 different Open Weather API's to get the data. One for the
 Extra scripts that were used are moment.js and jQuery. Moment JS was used to format the dates of the applicarion and jQuery was to make DOM access more simplified.
 
 ## Preview ##
-![screenshot](https://imgur.com/a/g27OTSm)
+![screenshot](https://i.imgur.com/COxso71.png)
 
 
 ## Live Page ##
