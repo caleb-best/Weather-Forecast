@@ -7,6 +7,7 @@ const mainWeathEl = $('#mainWeath')
 const cityName = $('#mainName');
 const cityTemp = $('#mainTemp');
 const cityHumid = $('#mainHumid');
+const cityWind = $('#mainWind');
 const cityUV = $('#mainUV');
 
 const key = '4529e17e22e457ac065d45b98973fed0';
@@ -34,13 +35,18 @@ searchBtn.on('click', (event) => {
 
 function getWeather(inputVal){
     
-    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + inputVal + "&units=metric&appid=" + key;
+    let apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + inputVal + "&units=metric&appid=" + key;
 
     $.ajax({
-        url: queryURL,
+        url: apiURL,
         method: 'GET'
     }).then( (response) => {
         console.log(response)
+
+        cityName.text(response.name);
+        cityTemp.text(response.main.temp + '°C');
+        cityHumid.text(response.main.humidity + '%');
+        cityWind.text(response.wind.speed + 'Km/h')
     })
 
 }
