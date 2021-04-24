@@ -17,17 +17,17 @@ cityName.text('('+ currentDay +')');
 
 $(document).on('submit', function(){
     document.preventDefault();
-    let inputVal = searchInput.val().trim();
-    
-    //initialize functions
+    const inputVal = searchInput.val().trim();
     getWeather(inputVal)
+    searchHistory(inputVal)
     searchInput.val('')
 });
 
 searchBtn.on('click', (event) => {
     event.preventDefault();
     let inputVal = searchInput.val().trim();
-    getWeather(inputVal)
+    getWeather(inputVal);
+    searchHistory(inputVal);
     searchInput.val('')
 
 })
@@ -125,4 +125,62 @@ function getWeather(inputVal){
 
 }
 
+let cityResult = [];
+
+clearSearch.on('click', () => {
+    cityResult = [];
+    prevSearch();
+    $(this).addClass("hide");
+});
+
+searchList.on('click', "li.hist-btn", (event) => {
+    let value = $(this).data("value");
+    getWeather(value);
+    searchHistory(value)
+})
+
+function searchHistory(inputVal) {
+    if (inputVal) {
+        if (cityResult.indexOf(inputVal) === -1) {
+            cityResult.push(inputVal);
+            prevSearch();
+            clearSearch.removeClass("hide")
+
+        }
+        else {
+            let removeIndex = cityResult.indexOf(inputVal);
+            cityResult.splice(removeIndex, 1)
+            cityResult.push(inputVal)
+
+            prevSearch();
+            
+            clearSearch.removeClass("hide")
+        }
+    }
+}
+
+
+
+function prevSearch() {
+    cityResult.forEach(function (city) {
+        let histBtn = $('<li class"list-group-item hist-btn">');
+        histBtn.attr("data-value", city); 
+        histBtn.text(city);
+        searchList.append(histBtn);
+    });
+    localStorage.setItem("history", JSON.stringify(cityResult))
+ 
+}
+
+function loadHist() {
+    if (localStorage.getItem("history")) {
+        cityResult = JSON.parse(localStorage.getItem("history"));
+        let lastIndex = cityResult.length - 1;
+       
+        prevSearch();
+        if (cityResult.length !== 0) {
+            getWeather(cityResult[lastIndex]);  
+        }
+    }
+}
 
