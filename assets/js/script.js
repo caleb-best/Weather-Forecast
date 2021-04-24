@@ -47,7 +47,17 @@ function getWeather(inputVal){
         cityTemp.text(response.main.temp + '°C');
         cityHumid.text(response.main.humidity + '%');
         cityWind.text(response.wind.speed + 'Km/h')
-    })
+
+        const lat = response.coord.lat
+        const lon = response.coord.lon
+
+        const uvLink = 'https://api.openweathermap.org/data/2.5/uvi?&lat=' + lat + "&lon=" + lon + "&appid=" + key;
+
+        console.log(uvLink);
+
+
+
+        })
 
 }
 
