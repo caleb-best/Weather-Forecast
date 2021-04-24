@@ -5,6 +5,7 @@ const clearSearch = $('#clearHist');
 
 const mainWeathEl = $('#mainWeath')
 const cityName = $('#mainName');
+const cityDate = $('#cityDate')
 const cityTemp = $('#mainTemp');
 const cityHumid = $('#mainHumid');
 const cityWind = $('#mainWind');
@@ -13,7 +14,7 @@ const cityUV = $('#mainUV');
 const key = '4529e17e22e457ac065d45b98973fed0';
 
 let currentDay = moment().format('L');
-cityName.text('('+ currentDay +')');
+cityDate.text('('+ currentDay +')');
 
 $(document).on('submit', function(){
     document.preventDefault();
@@ -21,6 +22,7 @@ $(document).on('submit', function(){
     getWeather(inputVal)
     searchHistory(inputVal)
     searchInput.val('')
+
 });
 
 searchBtn.on('click', (event) => {
@@ -29,6 +31,8 @@ searchBtn.on('click', (event) => {
     getWeather(inputVal);
     searchHistory(inputVal);
     searchInput.val('')
+    const parentRow = $('#fiveParent');
+    parentRow.removeClass('hide')
 
 })
 
@@ -44,9 +48,12 @@ function getWeather(inputVal){
         console.log(response)
 
         cityName.text(response.name);
+        $('#cityDate').text('('+ currentDay +')');
+        cityName.append("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='" + response.weather[0].main + "' />")
         cityTemp.text(response.main.temp + '°C');
         cityHumid.text(response.main.humidity + '%');
         cityWind.text(response.wind.speed + 'Km/h')
+        
 
         const lat = response.coord.lat
         const lon = response.coord.lon
@@ -91,7 +98,7 @@ function getWeather(inputVal){
                 let fiveDate = moment(response.list[i].dt_txt).format('L')
                 console.log(fiveDate);
 
-                const fiveCol = $("<div class='col-12 mb-3'>");
+                const fiveCol = $("<div class='col-2 justify-content-center '>");
                 const fiveCard = $("<div class='card'>");
                 const fiveCardBody = $("<div class='card-body'>")
                 const fiveDay = $("<h5 class='card-title'>");
@@ -134,6 +141,7 @@ clearSearch.on('click', () => {
 });
 
 searchList.on('click', "li.hist-btn", (event) => {
+    event.preventDefault();
     let value = $(this).data("value");
     getWeather(value);
     searchHistory(value)
@@ -164,7 +172,7 @@ function searchHistory(inputVal) {
 function prevSearch() {
     searchList.empty();
     cityResult.forEach(function (city) {
-        let histBtn = $('<li class"list-group-item hist-btn">');
+        let histBtn = $('<li class="list-group-item hist-btn border">');
         histBtn.attr("data-value", city); 
         histBtn.text(city);
         searchList.append(histBtn);

@@ -21,32 +21,34 @@
         </header>
 
         <section id="content" class="row content-row">
-            <div class="col-12 bg-light">
-                <h5>Search for a city</h5>
-                <form>
+            <div id="Search" class="col-12 col-md-3 bg-light">
+                <div>
+                   <h5>Search for a city</h5>
+                    <form>
                     <div class="form-group input-group">
                         <input type="text" class="form-control" id="citySearch" placeholder="Enter City Name...">
                         <button class="btn btn-info" type="button" id="citySearchBtn">
                             <i class="fa fa-search"></i>
                         </button>
-
                     </div>
-                </form>
+                </form> 
+                </div>
+                
 
                 <div class="card">
-                    <ul class="list-group list-group-flush" id="cityList">
+                    <ul class="list-group list-group-flush text-center" id="cityList">
                         <!-- List Items here -->
                     </ul>
-                    <button id="clearHist" class="btn btn-secondary">
+                    <button id="clearHist" class="btn btn-secondary btn-sm">
                         Clear
                     </button>
                 </div>
-
-                <div id="mainWeath" class="col-12">
+            </div>    
+                <div id="mainWeath" class="col-12 col-md-9">
                     <div class="row">
                         <div class="col-12">
-                            <div>
-                                <h2 id="mainName">City Name</h2>
+                            <div class="border rounded my-3 px-3 py-3">
+                                <h2 id="mainName">City Name<span class="text-muted" id="cityDate"></span></h2>
                                 <p>Temperature: <span id="mainTemp"></span></p>
                                 <p>Humidity: <span id="mainHumid"></span></p>
                                 <p>Wind Speed: <span id="mainWind"></span></p>
@@ -57,9 +59,11 @@
                     </div>
                 </div>
 
-                <div id="fiveDay" class="row">
-                    <div class="col-5">   
-                        <div class="card">
+        </section>
+
+                <div id="fiveParent" class="row hide">
+                    <div id="fiveDay" class="col-12 d-flex justify-content-center">   
+                        <div class="card col-2">
                             <div class="card-body">
                                 <h5 class="card-title">Date</h5>
                                 
@@ -69,9 +73,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
 
-        </section>
+        
         <script src="../weather-forecast/assets/js/script.js"></script>
 </body>
 </html>
